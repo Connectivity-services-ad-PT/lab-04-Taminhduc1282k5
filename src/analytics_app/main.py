@@ -300,6 +300,11 @@ def health() -> HealthStatus:
     return HealthStatus(status="ok", service=SERVICE_NAME, time=now_utc())
 
 
+@app.head("/health")
+def health_head() -> None:
+    return None
+
+
 @app.post(
     "/analytics/iot-events",
     status_code=status.HTTP_201_CREATED,
