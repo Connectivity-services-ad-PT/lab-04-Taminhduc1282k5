@@ -1,0 +1,374 @@
+{
+  "info": {
+    "name": "FIT4110 Lab04 Analytics Docker Verification",
+    "description": "Verifies the Dockerized Smart Campus Analytics Service against the Lab 04 OpenAPI contract.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01_Functional",
+      "item": [
+        {
+          "name": "GET health returns 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/health"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Health schema matches contract', function () {",
+                  "  const json = pm.response.json();",
+                  "  pm.expect(json.status).to.eql('ok');",
+                  "  pm.expect(json.service).to.eql('analytics-service');",
+                  "  pm.expect(json.time).to.be.a('string');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST IoT event returns 201",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/analytics/iot-events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deviceId\": \"SENSOR-001\",\n  \"metric\": \"temperature\",\n  \"value\": 38.5,\n  \"timestamp\": \"{{$isoTimestamp}}\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST Camera event returns 201",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/analytics/camera-events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventType\": \"camera.motion.detected\",\n  \"cameraId\": \"CAM-001\",\n  \"detectionId\": \"{{$guid}}\",\n  \"confidenceScore\": 0.94,\n  \"severity\": \"HIGH\",\n  \"imageRef\": \"https://example.com/images/cam-001.jpg\",\n  \"timestamp\": \"{{$isoTimestamp}}\",\n  \"correlationId\": \"{{$guid}}\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST Business event returns 201",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/analytics/business-events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventType\": \"policy.decision.created\",\n  \"sourceModule\": \"policy-engine\",\n  \"decisionId\": \"{{$guid}}\",\n  \"policyId\": \"POLICY-001\",\n  \"subjectId\": \"USER-001\",\n  \"result\": \"REVIEW\",\n  \"severity\": \"HIGH\",\n  \"riskScore\": 82,\n  \"analyticsRequired\": true,\n  \"notificationRequired\": true,\n  \"reason\": \"High risk access attempt\",\n  \"timestamp\": \"{{$isoTimestamp}}\",\n  \"correlationId\": \"{{$guid}}\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST Access event returns 201",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/analytics/access-events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventType\": \"access.log.created\",\n  \"gateId\": \"GATE-01\",\n  \"direction\": \"IN\",\n  \"cardIdHash\": \"sha256-demo-card\",\n  \"decision\": \"ALLOW\",\n  \"timestamp\": \"{{$isoTimestamp}}\",\n  \"correlationId\": \"{{$guid}}\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET analytics events returns page",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": "{{baseUrl}}/analytics/events"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is AnalyticsPage', function () {",
+                  "  const json = pm.response.json();",
+                  "  pm.expect(json.items).to.be.an('array');",
+                  "  pm.expect(json.total).to.be.a('number');",
+                  "  pm.expect(json.page).to.eql(1);",
+                  "  pm.expect(json.pageSize).to.eql(10);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET KPI returns array",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": "{{baseUrl}}/analytics/kpi"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response contains KPI statistics', function () { const json = pm.response.json(); pm.expect(json).to.be.an('array'); pm.expect(json[0]).to.have.property('metricName'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET Dashboard returns array",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": "{{baseUrl}}/analytics/dashboard"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response contains dashboard metrics', function () { const json = pm.response.json(); pm.expect(json).to.be.an('array'); pm.expect(json[0]).to.have.property('metricName'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET known report returns 200",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": "{{baseUrl}}/analytics/report/11111111-1111-4111-8111-111111111111"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response is AnalyticsResult', function () { const json = pm.response.json(); pm.expect(json.analyticsId).to.eql('11111111-1111-4111-8111-111111111111'); pm.expect(json).to.have.property('generatedAt'); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "02_Auth_Negative",
+      "item": [
+        {
+          "name": "GET events without token returns 401",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/analytics/events"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Missing token returns 401', function () { pm.response.to.have.status(401); });",
+                  "assertProblemDetails();",
+                  "function assertProblemDetails() {",
+                  "  const json = pm.response.json();",
+                  "  pm.expect(json).to.have.property('type');",
+                  "  pm.expect(json).to.have.property('title');",
+                  "  pm.expect(json.status).to.eql(401);",
+                  "  pm.expect(json).to.have.property('detail');",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET events with wrong token returns 401",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer wrong-token" }
+            ],
+            "url": "{{baseUrl}}/analytics/events"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Wrong token returns 401', function () { pm.response.to.have.status(401); });",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.status).to.eql(401);",
+                  "pm.expect(json).to.have.property('detail');"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST IoT event missing deviceId returns 422",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/analytics/iot-events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metric\": \"temperature\",\n  \"value\": 38.5,\n  \"timestamp\": \"{{$isoTimestamp}}\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Missing required field returns 422', function () { pm.response.to.have.status(422); });",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.status).to.eql(422);",
+                  "pm.expect(json).to.have.property('detail');"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST Business riskScore above 100 returns 422",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/analytics/business-events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventType\": \"policy.decision.created\",\n  \"decisionId\": \"{{$guid}}\",\n  \"riskScore\": 101,\n  \"timestamp\": \"{{$isoTimestamp}}\",\n  \"correlationId\": \"{{$guid}}\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Out of range riskScore returns 422', function () { pm.response.to.have.status(422); });",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.status).to.eql(422);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET unknown report returns 404",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": "{{baseUrl}}/analytics/report/99999999-9999-4999-8999-999999999999"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Unknown report returns 404', function () { pm.response.to.have.status(404); });",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.status).to.eql(404);",
+                  "pm.expect(json).to.have.property('detail');"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
