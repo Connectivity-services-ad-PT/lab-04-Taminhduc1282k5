@@ -4,9 +4,17 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   docker-newman:
     runs-on: ubuntu-latest
+
+    env:
+      LOCAL_IMAGE: fit4110/analytics-service:lab04
+      GHCR_IMAGE: ghcr.io/connectivity-services-ad-pt/team-analytics:v0.1.0-team-analytics
 
     steps:
       - uses: actions/checkout@v4
@@ -24,7 +32,7 @@ jobs:
         run: npm run lint:openapi
 
       - name: Build Docker image
-        run: docker build -t fit4110/analytics-service:lab04 .
+        run: docker build -t $LOCAL_IMAGE .
 
       - name: Run Docker container
         run: |
@@ -32,13 +40,23 @@ jobs:
             --name fit4110-analytics-lab04 \
             -p 8000:8000 \
             --env-file .env.example \
-            fit4110/analytics-service:lab04
+            $LOCAL_IMAGE
 
       - name: Wait for service health
         run: npx wait-on http://localhost:8000/health --timeout 30000
 
       - name: Run Newman against Docker container
         run: npm run test:local
+
+      - name: Login to GHCR
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Push Docker image
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          docker tag $LOCAL_IMAGE $GHCR_IMAGE
+          docker push $GHCR_IMAGE
 
       - name: Show container logs on failure
         if: failure()
