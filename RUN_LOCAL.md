@@ -1,3 +1,4 @@
+
 # RUN_LOCAL.md - Huong dan chay Lab 04 Analytics Service
 
 Tai lieu nay giup nguoi khac clone repo sach va chay lai Analytics Service trong Docker.

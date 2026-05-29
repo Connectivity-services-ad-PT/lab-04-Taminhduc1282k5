@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="FIT4110 Lab04 Analytics Docker Verification" tests="14" time="0.147">
-  <testsuite name="01_Functional / GET health returns 200" id="bfdc23cc-fedd-406e-966f-ddeeb7a606b9" timestamp="2026-05-26T10:10:55.478Z" tests="2" failures="0" errors="0" time="0.043">
-    <testcase name="Status code is 200" time="0.043" classname="01FunctionalGetHealthReturns200"/>
-    <testcase name="Health schema matches contract" time="0.043" classname="01FunctionalGetHealthReturns200"/>
+<testsuites name="FIT4110 Lab04 Analytics Docker Verification" tests="14" time="0.243">
+  <testsuite name="01_Functional / GET health returns 200" id="29727be2-486a-47dc-b019-814977dbcecc" timestamp="2026-05-29T03:45:49.987Z" tests="2" failures="0" errors="0" time="0.075">
+    <testcase name="Status code is 200" time="0.075" classname="01FunctionalGetHealthReturns200"/>
+    <testcase name="Health schema matches contract" time="0.075" classname="01FunctionalGetHealthReturns200"/>
   </testsuite>
-  <testsuite name="01_Functional / POST IoT event returns 201" id="06bf9b9c-9392-48ca-9182-acfb7f479d6c" timestamp="2026-05-26T10:10:55.478Z" tests="1" failures="0" errors="0" time="0.010">
-    <testcase name="Status code is 201" time="0.010" classname="01FunctionalPostIoTEventReturns201"/>
+  <testsuite name="01_Functional / POST IoT event returns 201" id="303ac1d1-35f0-43cb-a1fc-10a639cffc1a" timestamp="2026-05-29T03:45:49.987Z" tests="1" failures="0" errors="0" time="0.008">
+    <testcase name="Status code is 201" time="0.008" classname="01FunctionalPostIoTEventReturns201"/>
   </testsuite>
-  <testsuite name="01_Functional / POST Camera event returns 201" id="9e93274b-b91e-436c-8dd6-c461d97f0fef" timestamp="2026-05-26T10:10:55.478Z" tests="1" failures="0" errors="0" time="0.035">
-    <testcase name="Status code is 201" time="0.035" classname="01FunctionalPostCameraEventReturns201"/>
+  <testsuite name="01_Functional / POST Camera event returns 201" id="82d635c6-fe5f-49b9-a2d4-7c3b97832570" timestamp="2026-05-29T03:45:49.987Z" tests="1" failures="0" errors="0" time="0.007">
+    <testcase name="Status code is 201" time="0.007" classname="01FunctionalPostCameraEventReturns201"/>
   </testsuite>
-  <testsuite name="01_Functional / POST Business event returns 201" id="38e44d44-8b8f-48b5-9758-a3c52b64d2ed" timestamp="2026-05-26T10:10:55.478Z" tests="1" failures="0" errors="0" time="0.009">
-    <testcase name="Status code is 201" time="0.009" classname="01FunctionalPostBusinessEventReturns201"/>
+  <testsuite name="01_Functional / POST Business event returns 201" id="19a6d13f-01ac-48ca-a40e-984fa30b2e52" timestamp="2026-05-29T03:45:49.987Z" tests="1" failures="0" errors="0" time="0.015">
+    <testcase name="Status code is 201" time="0.015" classname="01FunctionalPostBusinessEventReturns201"/>
   </testsuite>
-  <testsuite name="01_Functional / POST Access event returns 201" id="750534fa-0052-4073-b560-d85fd49ab2a9" timestamp="2026-05-26T10:10:55.478Z" tests="1" failures="0" errors="0" time="0.007">
-    <testcase name="Status code is 201" time="0.007" classname="01FunctionalPostAccessEventReturns201"/>
+  <testsuite name="01_Functional / POST Access event returns 201" id="fd421700-e7ad-478f-bbd2-0b3af32f7248" timestamp="2026-05-29T03:45:49.987Z" tests="1" failures="0" errors="0" time="0.012">
+    <testcase name="Status code is 201" time="0.012" classname="01FunctionalPostAccessEventReturns201"/>
   </testsuite>
-  <testsuite name="01_Functional / GET analytics events returns page" id="c76405c5-fc1b-4343-944b-ce6d4e32a29e" timestamp="2026-05-26T10:10:55.478Z" tests="2" failures="0" errors="0" time="0.005">
-    <testcase name="Status code is 200" time="0.005" classname="01FunctionalGetAnalyticsEventsReturnsPage"/>
-    <testcase name="Response is AnalyticsPage" time="0.005" classname="01FunctionalGetAnalyticsEventsReturnsPage"/>
+  <testsuite name="01_Functional / GET analytics events returns page" id="d50e4c42-ee21-4fb6-a1c2-7b8410d305d5" timestamp="2026-05-29T03:45:49.987Z" tests="2" failures="0" errors="0" time="0.053">
+    <testcase name="Status code is 200" time="0.053" classname="01FunctionalGetAnalyticsEventsReturnsPage"/>
+    <testcase name="Response is AnalyticsPage" time="0.053" classname="01FunctionalGetAnalyticsEventsReturnsPage"/>
   </testsuite>
-  <testsuite name="01_Functional / GET KPI returns array" id="f6a14f7f-1320-4f76-ab57-bc3ec8d7402e" timestamp="2026-05-26T10:10:55.478Z" tests="2" failures="0" errors="0" time="0.005">
-    <testcase name="Status code is 200" time="0.005" classname="01FunctionalGetKpiReturnsArray"/>
-    <testcase name="Response contains KPI statistics" time="0.005" classname="01FunctionalGetKpiReturnsArray"/>
+  <testsuite name="01_Functional / GET KPI returns array" id="049dfb75-c6cc-4cf3-bc5d-d1341cf2a982" timestamp="2026-05-29T03:45:49.987Z" tests="2" failures="0" errors="0" time="0.013">
+    <testcase name="Status code is 200" time="0.013" classname="01FunctionalGetKpiReturnsArray"/>
+    <testcase name="Response contains KPI statistics" time="0.013" classname="01FunctionalGetKpiReturnsArray"/>
   </testsuite>
-  <testsuite name="01_Functional / GET Dashboard returns array" id="95fe160a-bd18-42c1-88b2-7df65da3c75a" timestamp="2026-05-26T10:10:55.478Z" tests="2" failures="0" errors="0" time="0.004">
-    <testcase name="Status code is 200" time="0.004" classname="01FunctionalGetDashboardReturnsArray"/>
-    <testcase name="Response contains dashboard metrics" time="0.004" classname="01FunctionalGetDashboardReturnsArray"/>
+  <testsuite name="01_Functional / GET Dashboard returns array" id="5b3d5f38-91dc-4bb3-8e57-3923e79eaca8" timestamp="2026-05-29T03:45:49.987Z" tests="2" failures="0" errors="0" time="0.008">
+    <testcase name="Status code is 200" time="0.008" classname="01FunctionalGetDashboardReturnsArray"/>
+    <testcase name="Response contains dashboard metrics" time="0.008" classname="01FunctionalGetDashboardReturnsArray"/>
   </testsuite>
-  <testsuite name="01_Functional / GET known report returns 200" id="1f5174cd-77cd-4146-b4de-ff88edc099e9" timestamp="2026-05-26T10:10:55.478Z" tests="2" failures="0" errors="0" time="0.005">
-    <testcase name="Status code is 200" time="0.005" classname="01FunctionalGetKnownReportReturns200"/>
-    <testcase name="Response is AnalyticsResult" time="0.005" classname="01FunctionalGetKnownReportReturns200"/>
+  <testsuite name="01_Functional / GET known report returns 200" id="5ae320b2-153d-429b-8556-638f5ff44f63" timestamp="2026-05-29T03:45:49.987Z" tests="2" failures="0" errors="0" time="0.016">
+    <testcase name="Status code is 200" time="0.016" classname="01FunctionalGetKnownReportReturns200"/>
+    <testcase name="Response is AnalyticsResult" time="0.016" classname="01FunctionalGetKnownReportReturns200"/>
   </testsuite>
-  <testsuite name="02_Auth_Negative / GET events without token returns 401" id="a56d6483-38b2-42a1-94fe-9dffa872e2ad" timestamp="2026-05-26T10:10:55.478Z" tests="1" failures="0" errors="0" time="0.005">
-    <testcase name="Missing token returns 401" time="0.005" classname="02AuthNegativeGetEventsWithoutTokenReturns401"/>
+  <testsuite name="02_Auth_Negative / GET events without token returns 401" id="92c78554-39b9-4dd5-8696-e4a694878284" timestamp="2026-05-29T03:45:49.987Z" tests="1" failures="0" errors="0" time="0.009">
+    <testcase name="Missing token returns 401" time="0.009" classname="02AuthNegativeGetEventsWithoutTokenReturns401"/>
   </testsuite>
-  <testsuite name="02_Auth_Negative / GET events with wrong token returns 401" id="77375600-fa1d-4865-82a0-03e381d3583d" timestamp="2026-05-26T10:10:55.478Z" tests="1" failures="0" errors="0" time="0.003">
-    <testcase name="Wrong token returns 401" time="0.003" classname="02AuthNegativeGetEventsWithWrongTokenReturns401"/>
+  <testsuite name="02_Auth_Negative / GET events with wrong token returns 401" id="5ae2e54f-379a-42c2-86a2-11b5abd0592f" timestamp="2026-05-29T03:45:49.987Z" tests="1" failures="0" errors="0" time="0.005">
+    <testcase name="Wrong token returns 401" time="0.005" classname="02AuthNegativeGetEventsWithWrongTokenReturns401"/>
   </testsuite>
-  <testsuite name="02_Auth_Negative / POST IoT event missing deviceId returns 422" id="d3589d8c-bc33-4d96-b3e4-5e59f2733eaf" timestamp="2026-05-26T10:10:55.478Z" tests="1" failures="0" errors="0" time="0.007">
+  <testsuite name="02_Auth_Negative / POST IoT event missing deviceId returns 422" id="d3d40fc5-dca0-4a1d-b9f1-be978b9168f4" timestamp="2026-05-29T03:45:49.987Z" tests="1" failures="0" errors="0" time="0.007">
     <testcase name="Missing required field returns 422" time="0.007" classname="02AuthNegativePostIoTEventMissingDeviceIdReturns422"/>
   </testsuite>
-  <testsuite name="02_Auth_Negative / POST Business riskScore above 100 returns 422" id="6e40da2e-10c5-4ba6-b01d-e7d93636ed1b" timestamp="2026-05-26T10:10:55.478Z" tests="1" failures="0" errors="0" time="0.005">
-    <testcase name="Out of range riskScore returns 422" time="0.005" classname="02AuthNegativePostBusinessRiskScoreAbove100Returns422"/>
+  <testsuite name="02_Auth_Negative / POST Business riskScore above 100 returns 422" id="88305c90-af9f-4e56-aab2-30c3f52a8bab" timestamp="2026-05-29T03:45:49.987Z" tests="1" failures="0" errors="0" time="0.008">
+    <testcase name="Out of range riskScore returns 422" time="0.008" classname="02AuthNegativePostBusinessRiskScoreAbove100Returns422"/>
   </testsuite>
-  <testsuite name="02_Auth_Negative / GET unknown report returns 404" id="892ae9b2-d6c8-44ba-be03-a5bd0396cc51" timestamp="2026-05-26T10:10:55.478Z" tests="1" failures="0" errors="0" time="0.004">
-    <testcase name="Unknown report returns 404" time="0.004" classname="02AuthNegativeGetUnknownReportReturns404"/>
+  <testsuite name="02_Auth_Negative / GET unknown report returns 404" id="ad9b0889-2037-43d8-a661-3eb3211fb59e" timestamp="2026-05-29T03:45:49.987Z" tests="1" failures="0" errors="0" time="0.007">
+    <testcase name="Unknown report returns 404" time="0.007" classname="02AuthNegativeGetUnknownReportReturns404"/>
   </testsuite>
 </testsuites>
